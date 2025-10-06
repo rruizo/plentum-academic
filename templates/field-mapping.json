@@ -1,0 +1,230 @@
+{
+  "reliability_report_mapping": {
+    "company_data": {
+      "{{COMPANY_NAME}}": "config.system_name || 'Avsec Trust'",
+      "{{COMPANY_LOGO}}": "config.logo_url",
+      "{{FOOTER_LOGO}}": "config.logo_url",
+      "{{COMPANY_ADDRESS}}": "reportConfig.company_address || 'Dirección no disponible'",
+      "{{COMPANY_PHONE}}": "reportConfig.company_phone || 'Teléfono no disponible'",
+      "{{COMPANY_EMAIL}}": "config.contact_email || config.support_email"
+    },
+    "candidate_data": {
+      "{{CANDIDATE_NAME}}": "profile.full_name",
+      "{{CANDIDATE_EMAIL}}": "profile.email",
+      "{{CANDIDATE_COMPANY}}": "profile.company",
+      "{{CANDIDATE_AREA}}": "profile.area",
+      "{{CANDIDATE_SECTION}}": "profile.section",
+      "{{EXAM_DATE}}": "new Date(attempt.completed_at).toLocaleDateString('es-ES')",
+      "{{EXAM_DURATION}}": "exam.duracion_minutos",
+      "{{EXAM_STATUS}}": "'Completado'"
+    },
+    "overall_scores": {
+      "{{OVERALL_SCORE}}": "processedData.overallScore.toFixed(1)",
+      "{{RISK_LEVEL}}": "processedData.overallRiskLevel",
+      "{{RISK_LEVEL_CLASS}}": "getRiskClass(processedData.overallRiskLevel)",
+      "{{QUESTIONS_ANSWERED}}": "Object.keys(attempt.answers || {}).length"
+    },
+    "category_scores": {
+      "honestidad": {
+        "{{HONESTIDAD_SCORE}}": "processedData.categoryScores['Honestidad e Integridad']?.average?.toFixed(1) || '0'",
+        "{{HONESTIDAD_NATIONAL}}": "processedData.categoryScores['Honestidad e Integridad']?.nationalAverage || '2.1'",
+        "{{HONESTIDAD_PERCENTILE}}": "processedData.categoryScores['Honestidad e Integridad']?.percentile || '50'",
+        "{{HONESTIDAD_RISK}}": "processedData.categoryScores['Honestidad e Integridad']?.riskLevel || 'MEDIO'",
+        "{{HONESTIDAD_RISK_CLASS}}": "getRiskClass(processedData.categoryScores['Honestidad e Integridad']?.riskLevel)"
+      },
+      "sustancias": {
+        "{{SUSTANCIAS_SCORE}}": "processedData.categoryScores['Consumo de Sustancias']?.average?.toFixed(1) || '0'",
+        "{{SUSTANCIAS_NATIONAL}}": "processedData.categoryScores['Consumo de Sustancias']?.nationalAverage || '1.8'",
+        "{{SUSTANCIAS_PERCENTILE}}": "processedData.categoryScores['Consumo de Sustancias']?.percentile || '50'",
+        "{{SUSTANCIAS_RISK}}": "processedData.categoryScores['Consumo de Sustancias']?.riskLevel || 'MEDIO'",
+        "{{SUSTANCIAS_RISK_CLASS}}": "getRiskClass(processedData.categoryScores['Consumo de Sustancias']?.riskLevel)"
+      },
+      "antisocial": {
+        "{{ANTISOCIAL_SCORE}}": "processedData.categoryScores['Comportamiento Antisocial']?.average?.toFixed(1) || '0'",
+        "{{ANTISOCIAL_NATIONAL}}": "processedData.categoryScores['Comportamiento Antisocial']?.nationalAverage || '1.5'",
+        "{{ANTISOCIAL_PERCENTILE}}": "processedData.categoryScores['Comportamiento Antisocial']?.percentile || '50'",
+        "{{ANTISOCIAL_RISK}}": "processedData.categoryScores['Comportamiento Antisocial']?.riskLevel || 'MEDIO'",
+        "{{ANTISOCIAL_RISK_CLASS}}": "getRiskClass(processedData.categoryScores['Comportamiento Antisocial']?.riskLevel)"
+      },
+      "agresion": {
+        "{{AGRESION_SCORE}}": "processedData.categoryScores['Agresión y Violencia']?.average?.toFixed(1) || '0'",
+        "{{AGRESION_NATIONAL}}": "processedData.categoryScores['Agresión y Violencia']?.nationalAverage || '1.3'",
+        "{{AGRESION_PERCENTILE}}": "processedData.categoryScores['Agresión y Violencia']?.percentile || '50'",
+        "{{AGRESION_RISK}}": "processedData.categoryScores['Agresión y Violencia']?.riskLevel || 'MEDIO'",
+        "{{AGRESION_RISK_CLASS}}": "getRiskClass(processedData.categoryScores['Agresión y Violencia']?.riskLevel)"
+      },
+      "seguridad": {
+        "{{SEGURIDAD_SCORE}}": "processedData.categoryScores['Seguridad en el Trabajo']?.average?.toFixed(1) || '0'",
+        "{{SEGURIDAD_NATIONAL}}": "processedData.categoryScores['Seguridad en el Trabajo']?.nationalAverage || '2.0'",
+        "{{SEGURIDAD_PERCENTILE}}": "processedData.categoryScores['Seguridad en el Trabajo']?.percentile || '50'",
+        "{{SEGURIDAD_RISK}}": "processedData.categoryScores['Seguridad en el Trabajo']?.riskLevel || 'MEDIO'",
+        "{{SEGURIDAD_RISK_CLASS}}": "getRiskClass(processedData.categoryScores['Seguridad en el Trabajo']?.riskLevel)"
+      },
+      "confiabilidad": {
+        "{{CONFIABILIDAD_SCORE}}": "processedData.categoryScores['Confiabilidad Laboral']?.average?.toFixed(1) || '0'",
+        "{{CONFIABILIDAD_NATIONAL}}": "processedData.categoryScores['Confiabilidad Laboral']?.nationalAverage || '2.2'",
+        "{{CONFIABILIDAD_PERCENTILE}}": "processedData.categoryScores['Confiabilidad Laboral']?.percentile || '50'",
+        "{{CONFIABILIDAD_RISK}}": "processedData.categoryScores['Confiabilidad Laboral']?.riskLevel || 'MEDIO'",
+        "{{CONFIABILIDAD_RISK_CLASS}}": "getRiskClass(processedData.categoryScores['Confiabilidad Laboral']?.riskLevel)"
+      },
+      "robo": {
+        "{{ROBO_SCORE}}": "processedData.categoryScores['Robo de Inventario']?.average?.toFixed(1) || '0'",
+        "{{ROBO_NATIONAL}}": "processedData.categoryScores['Robo de Inventario']?.nationalAverage || '1.4'",
+        "{{ROBO_PERCENTILE}}": "processedData.categoryScores['Robo de Inventario']?.percentile || '50'",
+        "{{ROBO_RISK}}": "processedData.categoryScores['Robo de Inventario']?.riskLevel || 'MEDIO'",
+        "{{ROBO_RISK_CLASS}}": "getRiskClass(processedData.categoryScores['Robo de Inventario']?.riskLevel)"
+      },
+      "conducta": {
+        "{{CONDUCTA_SCORE}}": "processedData.categoryScores['Problemas de Conducta']?.average?.toFixed(1) || '0'",
+        "{{CONDUCTA_NATIONAL}}": "processedData.categoryScores['Problemas de Conducta']?.nationalAverage || '1.6'",
+        "{{CONDUCTA_PERCENTILE}}": "processedData.categoryScores['Problemas de Conducta']?.percentile || '50'",
+        "{{CONDUCTA_RISK}}": "processedData.categoryScores['Problemas de Conducta']?.riskLevel || 'MEDIO'",
+        "{{CONDUCTA_RISK_CLASS}}": "getRiskClass(processedData.categoryScores['Problemas de Conducta']?.riskLevel)"
+      },
+      "estres": {
+        "{{ESTRES_SCORE}}": "processedData.categoryScores['Estrés Laboral']?.average?.toFixed(1) || '0'",
+        "{{ESTRES_NATIONAL}}": "processedData.categoryScores['Estrés Laboral']?.nationalAverage || '2.3'",
+        "{{ESTRES_PERCENTILE}}": "processedData.categoryScores['Estrés Laboral']?.percentile || '50'",
+        "{{ESTRES_RISK}}": "processedData.categoryScores['Estrés Laboral']?.riskLevel || 'MEDIO'",
+        "{{ESTRES_RISK_CLASS}}": "getRiskClass(processedData.categoryScores['Estrés Laboral']?.riskLevel)"
+      }
+    },
+    "personal_factors": {
+      "{{MARITAL_STATUS}}": "personalFactors.estado_civil || 'No especificado'",
+      "{{HAS_CHILDREN}}": "personalFactors.tiene_hijos ? 'Sí' : 'No'",
+      "{{HOUSING_STATUS}}": "personalFactors.situacion_habitacional || 'No especificado'",
+      "{{AGE}}": "personalFactors.edad || 'No especificado'",
+      "{{PERSONAL_ADJUSTMENT}}": "(personalFactors.ajuste_total * 100).toFixed(1)"
+    },
+    "ai_analysis": {
+      "{{AI_DETAILED_ANALYSIS}}": "aiAnalysis.analysis || 'Análisis no disponible'",
+      "{{AI_CONCLUSIONS}}": "aiAnalysis.conclusions || 'Conclusiones no disponibles'"
+    },
+    "metadata": {
+      "{{GENERATION_DATE}}": "new Date().toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })",
+      "{{COMPARISON_CHART}}": "chartSvg || '[Gráfico no disponible]'"
+    }
+  },
+  "ocean_report_mapping": {
+    "company_data": {
+      "{{COMPANY_NAME}}": "config.system_name || 'Avsec Trust'",
+      "{{COMPANY_LOGO}}": "config.logo_url",
+      "{{FOOTER_LOGO}}": "config.logo_url",
+      "{{COMPANY_ADDRESS}}": "reportConfig.company_address || 'Dirección no disponible'",
+      "{{COMPANY_PHONE}}": "reportConfig.company_phone || 'Teléfono no disponible'",
+      "{{COMPANY_EMAIL}}": "config.contact_email || config.support_email"
+    },
+    "candidate_data": {
+      "{{CANDIDATE_NAME}}": "profile.full_name",
+      "{{CANDIDATE_EMAIL}}": "profile.email",
+      "{{CANDIDATE_COMPANY}}": "profile.company",
+      "{{CANDIDATE_AREA}}": "profile.area",
+      "{{CANDIDATE_SECTION}}": "profile.section",
+      "{{EVALUATION_DATE}}": "new Date(personalityResult.created_at).toLocaleDateString('es-ES')",
+      "{{TEST_DURATION}}": "psychometricTest.duration_minutes || 30",
+      "{{TEST_STATUS}}": "'Completado'"
+    },
+    "ocean_dimensions": {
+      "openness": {
+        "{{OPENNESS_SCORE}}": "personalityResult.apertura_score?.toFixed(1) || '0'",
+        "{{OPENNESS_PERCENTAGE}}": "Math.min(100, (personalityResult.apertura_score / 5) * 100)",
+        "{{OPENNESS_PERCENTILE}}": "calculatePercentile(personalityResult.apertura_score, 'openness')",
+        "{{OPENNESS_LEVEL}}": "getOceanLevel(personalityResult.apertura_score)",
+        "{{OPENNESS_LEVEL_CLASS}}": "getOceanLevelClass(personalityResult.apertura_score)",
+        "{{OPENNESS_INTERPRETATION}}": "getOceanInterpretation('openness', personalityResult.apertura_score)"
+      },
+      "conscientiousness": {
+        "{{CONSCIENTIOUSNESS_SCORE}}": "personalityResult.responsabilidad_score?.toFixed(1) || '0'",
+        "{{CONSCIENTIOUSNESS_PERCENTAGE}}": "Math.min(100, (personalityResult.responsabilidad_score / 5) * 100)",
+        "{{CONSCIENTIOUSNESS_PERCENTILE}}": "calculatePercentile(personalityResult.responsabilidad_score, 'conscientiousness')",
+        "{{CONSCIENTIOUSNESS_LEVEL}}": "getOceanLevel(personalityResult.responsabilidad_score)",
+        "{{CONSCIENTIOUSNESS_LEVEL_CLASS}}": "getOceanLevelClass(personalityResult.responsabilidad_score)",
+        "{{CONSCIENTIOUSNESS_INTERPRETATION}}": "getOceanInterpretation('conscientiousness', personalityResult.responsabilidad_score)"
+      },
+      "extraversion": {
+        "{{EXTRAVERSION_SCORE}}": "personalityResult.extraversion_score?.toFixed(1) || '0'",
+        "{{EXTRAVERSION_PERCENTAGE}}": "Math.min(100, (personalityResult.extraversion_score / 5) * 100)",
+        "{{EXTRAVERSION_PERCENTILE}}": "calculatePercentile(personalityResult.extraversion_score, 'extraversion')",
+        "{{EXTRAVERSION_LEVEL}}": "getOceanLevel(personalityResult.extraversion_score)",
+        "{{EXTRAVERSION_LEVEL_CLASS}}": "getOceanLevelClass(personalityResult.extraversion_score)",
+        "{{EXTRAVERSION_INTERPRETATION}}": "getOceanInterpretation('extraversion', personalityResult.extraversion_score)"
+      },
+      "agreeableness": {
+        "{{AGREEABLENESS_SCORE}}": "personalityResult.amabilidad_score?.toFixed(1) || '0'",
+        "{{AGREEABLENESS_PERCENTAGE}}": "Math.min(100, (personalityResult.amabilidad_score / 5) * 100)",
+        "{{AGREEABLENESS_PERCENTILE}}": "calculatePercentile(personalityResult.amabilidad_score, 'agreeableness')",
+        "{{AGREEABLENESS_LEVEL}}": "getOceanLevel(personalityResult.amabilidad_score)",
+        "{{AGREEABLENESS_LEVEL_CLASS}}": "getOceanLevelClass(personalityResult.amabilidad_score)",
+        "{{AGREEABLENESS_INTERPRETATION}}": "getOceanInterpretation('agreeableness', personalityResult.amabilidad_score)"
+      },
+      "neuroticism": {
+        "{{NEUROTICISM_SCORE}}": "personalityResult.neuroticismo_score?.toFixed(1) || '0'",
+        "{{NEUROTICISM_PERCENTAGE}}": "Math.min(100, (personalityResult.neuroticismo_score / 5) * 100)",
+        "{{NEUROTICISM_PERCENTILE}}": "calculatePercentile(personalityResult.neuroticismo_score, 'neuroticism')",
+        "{{NEUROTICISM_LEVEL}}": "getOceanLevel(personalityResult.neuroticismo_score)",
+        "{{NEUROTICISM_LEVEL_CLASS}}": "getOceanLevelClass(personalityResult.neuroticismo_score)",
+        "{{NEUROTICISM_INTERPRETATION}}": "getOceanInterpretation('neuroticism', personalityResult.neuroticismo_score)"
+      }
+    },
+    "motivations": {
+      "{{ACHIEVEMENT_SCORE}}": "personalityResult.logro_score?.toFixed(1) || '0'",
+      "{{ACHIEVEMENT_LEVEL}}": "getMotivationLevel(personalityResult.logro_score)",
+      "{{POWER_SCORE}}": "personalityResult.poder_score?.toFixed(1) || '0'",
+      "{{POWER_LEVEL}}": "getMotivationLevel(personalityResult.poder_score)",
+      "{{AFFILIATION_SCORE}}": "personalityResult.afiliacion_score?.toFixed(1) || '0'",
+      "{{AFFILIATION_LEVEL}}": "getMotivationLevel(personalityResult.afiliacion_score)",
+      "{{AUTONOMY_SCORE}}": "personalityResult.autonomia_score?.toFixed(1) || '0'",
+      "{{AUTONOMY_LEVEL}}": "getMotivationLevel(personalityResult.autonomia_score)",
+      "{{SECURITY_SCORE}}": "personalityResult.seguridad_score?.toFixed(1) || '0'",
+      "{{SECURITY_LEVEL}}": "getMotivationLevel(personalityResult.seguridad_score)",
+      "{{RECOGNITION_SCORE}}": "personalityResult.reconocimiento_score?.toFixed(1) || '0'",
+      "{{RECOGNITION_LEVEL}}": "getMotivationLevel(personalityResult.reconocimiento_score)"
+    },
+    "personal_factors": {
+      "{{MARITAL_STATUS}}": "personalFactors.estado_civil || 'No especificado'",
+      "{{HAS_CHILDREN}}": "personalFactors.tiene_hijos ? 'Sí' : 'No'",
+      "{{HOUSING_STATUS}}": "personalFactors.situacion_habitacional || 'No especificado'",
+      "{{AGE}}": "personalFactors.edad || 'No especificado'",
+      "{{PERSONAL_ADJUSTMENT}}": "(personalFactors.ajuste_total * 100).toFixed(1)"
+    },
+    "ai_analysis": {
+      "{{AI_PSYCHOLOGICAL_ANALYSIS}}": "aiAnalysis.analysis || 'Análisis no disponible'",
+      "{{AI_DEVELOPMENT_RECOMMENDATIONS}}": "aiAnalysis.recommendations || 'Recomendaciones no disponibles'"
+    },
+    "profile_recommendations": {
+      "{{IDENTIFIED_STRENGTHS}}": "aiAnalysis.strengths || 'Por determinar'",
+      "{{DEVELOPMENT_AREAS}}": "aiAnalysis.development_areas || 'Por determinar'",
+      "{{RECOMMENDED_ROLES}}": "aiAnalysis.recommended_roles || 'Por determinar'"
+    },
+    "metadata": {
+      "{{GENERATION_DATE}}": "new Date().toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })",
+      "{{RADAR_CHART}}": "radarChartSvg || '[Gráfico radial no disponible]'"
+    }
+  },
+  "helper_functions": {
+    "getRiskClass": {
+      "description": "Convierte nivel de riesgo a clase CSS",
+      "implementation": "function getRiskClass(riskLevel) { switch(riskLevel) { case 'RIESGO ALTO': return 'risk-high'; case 'RIESGO MEDIO': return 'risk-medium'; case 'RIESGO BAJO': return 'risk-low'; default: return 'risk-medium'; } }"
+    },
+    "getOceanLevel": {
+      "description": "Convierte puntaje OCEAN a nivel descriptivo",
+      "implementation": "function getOceanLevel(score) { if (score >= 3.5) return 'Alto'; if (score >= 2.5) return 'Medio'; return 'Bajo'; }"
+    },
+    "getOceanLevelClass": {
+      "description": "Convierte puntaje OCEAN a clase CSS",
+      "implementation": "function getOceanLevelClass(score) { if (score >= 3.5) return 'high-score'; if (score >= 2.5) return 'medium-score'; return 'low-score'; }"
+    },
+    "getMotivationLevel": {
+      "description": "Convierte puntaje de motivación a nivel descriptivo", 
+      "implementation": "function getMotivationLevel(score) { if (score >= 3.5) return 'Alta'; if (score >= 2.5) return 'Media'; return 'Baja'; }"
+    },
+    "calculatePercentile": {
+      "description": "Calcula percentil basado en puntaje y dimensión",
+      "implementation": "function calculatePercentile(score, dimension) { const normalized = (score / 5) * 100; return Math.round(Math.min(100, Math.max(0, normalized))); }"
+    },
+    "getOceanInterpretation": {
+      "description": "Genera interpretación textual para cada dimensión OCEAN",
+      "implementation": "function getOceanInterpretation(dimension, score) { /* Implementar interpretaciones específicas por dimensión y nivel */ }"
+    }
+  }
+}

@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Template - Reporte OCEAN Personalidad</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 12pt;
+            line-height: 1.4;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        .header {
+            text-align: center;
+            border-bottom: 2px solid #6B46C1;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        .logo-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 15px;
+        }
+        .logo-placeholder {
+            width: 80px;
+            height: 80px;
+            border: 2px dashed #ccc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10pt;
+            color: #666;
+        }
+        .company-info h1 {
+            color: #6B46C1;
+            font-size: 24pt;
+            margin: 0;
+            font-weight: bold;
+        }
+        .report-title {
+            color: #666;
+            font-size: 16pt;
+            margin: 5px 0 0 0;
+        }
+        .section {
+            margin: 25px 0;
+            page-break-inside: avoid;
+        }
+        .section-title {
+            background-color: #f5f5f5;
+            padding: 10px;
+            font-weight: bold;
+            font-size: 14pt;
+            border-left: 4px solid #6B46C1;
+            margin-bottom: 15px;
+        }
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 15px 0;
+        }
+        .info-item {
+            padding: 8px;
+            border-bottom: 1px solid #eee;
+        }
+        .info-label {
+            font-weight: bold;
+            color: #666;
+        }
+        .ocean-scores {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .dimension-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            background-color: #f9f9f9;
+        }
+        .dimension-title {
+            font-size: 14pt;
+            font-weight: bold;
+            color: #6B46C1;
+            margin-bottom: 10px;
+        }
+        .score-bar {
+            width: 100%;
+            height: 20px;
+            background-color: #e0e0e0;
+            border-radius: 10px;
+            margin: 10px 0;
+            position: relative;
+        }
+        .score-fill {
+            height: 100%;
+            border-radius: 10px;
+            position: relative;
+        }
+        .score-text {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-weight: bold;
+            color: white;
+            font-size: 10pt;
+        }
+        .high-score { background-color: #4CAF50; }
+        .medium-score { background-color: #FF9800; }
+        .low-score { background-color: #F44336; }
+        .chart-placeholder {
+            width: 100%;
+            height: 350px;
+            border: 2px dashed #ccc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px 0;
+            font-size: 14pt;
+            color: #666;
+        }
+        .motivation-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .motivation-card {
+            text-align: center;
+            padding: 15px;
+            border-radius: 8px;
+            background-color: #f8f9fa;
+        }
+        .motivation-score {
+            font-size: 20pt;
+            font-weight: bold;
+            color: #6B46C1;
+        }
+        .analysis-section {
+            background-color: #f0f4ff;
+            padding: 15px;
+            border-left: 4px solid #6B46C1;
+            margin: 20px 0;
+        }
+        .interpretation-box {
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            background-color: #f5f5f5;
+        }
+        .footer {
+            border-top: 2px solid #6B46C1;
+            padding-top: 20px;
+            margin-top: 40px;
+            text-align: center;
+            font-size: 10pt;
+            color: #666;
+        }
+        .page-break { page-break-before: always; }
+        @media print {
+            body { margin: 0; padding: 15px; }
+            .page-break { page-break-before: always; }
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER SECTION -->
+    <div class="header">
+        <div class="logo-section">
+            <div class="logo-placeholder">{{COMPANY_LOGO}}</div>
+            <div class="company-info">
+                <h1>{{COMPANY_NAME}}</h1>
+                <div class="report-title">Reporte de Evaluación de Personalidad OCEAN</div>
+            </div>
+        </div>
+        <div style="font-size: 11pt; color: #666;">
+            Fecha de generación: {{GENERATION_DATE}}
+        </div>
+    </div>
+
+    <!-- INFORMACIÓN PERSONAL -->
+    <div class="section">
+        <div class="section-title">Información Personal del Candidato</div>
+        <div class="info-grid">
+            <div class="info-item">
+                <div class="info-label">Nombre Completo:</div>
+                <div>{{CANDIDATE_NAME}}</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Email:</div>
+                <div>{{CANDIDATE_EMAIL}}</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Empresa:</div>
+                <div>{{CANDIDATE_COMPANY}}</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Área:</div>
+                <div>{{CANDIDATE_AREA}}</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Sección:</div>
+                <div>{{CANDIDATE_SECTION}}</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Fecha de Evaluación:</div>
+                <div>{{EVALUATION_DATE}}</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Duración del Test:</div>
+                <div>{{TEST_DURATION}} minutos</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Estado:</div>
+                <div>{{TEST_STATUS}}</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PERFIL OCEAN -->
+    <div class="section">
+        <div class="section-title">Perfil de Personalidad OCEAN</div>
+        <div class="ocean-scores">
+            {{OCEAN_DIMENSION_CARDS}}
+        </div>
+        
+        <!-- Ejemplo de tarjeta para referencia:
+        <div class="dimension-card">
+            <div class="dimension-title">Apertura a la Experiencia</div>
+            <div class="score-bar">
+                <div class="score-fill level-high" style="width: 85%">
+                    <div class="score-text">85.5</div>
+                </div>
+            </div>
+            <div style="font-size: 10pt; color: #666;">
+                Percentil: 78% | Nivel: ALTO
+            </div>
+        </div>
+        -->
+    </div>
+
+    <!-- GRÁFICO RADIAL -->
+    <div class="section">
+        <div class="section-title">Gráfico Radial de Personalidad</div>
+        <div class="chart-placeholder">
+            {{RADAR_CHART}}
+            <br>Gráfico radial OCEAN - Insertar aquí
+        </div>
+    </div>
+
+    <div class="page-break"></div>
+
+    <!-- INTERPRETACIONES POR DIMENSIÓN -->
+    <div class="section">
+        <div class="section-title">Interpretación Detallada por Dimensión</div>
+        
+        {{OCEAN_INTERPRETATIONS}}
+        
+        <!-- Ejemplo de interpretación para referencia:
+        <div class="interpretation-box">
+            <div style="font-weight: bold; color: #6B46C1; margin-bottom: 8px;">Apertura a la Experiencia (85.5)</div>
+            <div>Interpretación detallada de la dimensión...</div>
+        </div>
+        -->
+    </div>
+
+    <!-- MOTIVACIONES LABORALES -->
+    <div class="section">
+        <div class="section-title">Motivaciones Laborales</div>
+        <div class="motivation-grid">
+            <div class="motivation-card">
+                <div class="motivation-score">{{ACHIEVEMENT_SCORE}}</div>
+                <div style="font-weight: bold; margin: 5px 0;">Logro</div>
+                <div style="font-size: 10pt;">{{ACHIEVEMENT_LEVEL}}</div>
+            </div>
+            <div class="motivation-card">
+                <div class="motivation-score">{{POWER_SCORE}}</div>
+                <div style="font-weight: bold; margin: 5px 0;">Poder</div>
+                <div style="font-size: 10pt;">{{POWER_LEVEL}}</div>
+            </div>
+            <div class="motivation-card">
+                <div class="motivation-score">{{AFFILIATION_SCORE}}</div>
+                <div style="font-weight: bold; margin: 5px 0;">Afiliación</div>
+                <div style="font-size: 10pt;">{{AFFILIATION_LEVEL}}</div>
+            </div>
+            <div class="motivation-card">
+                <div class="motivation-score">{{AUTONOMY_SCORE}}</div>
+                <div style="font-weight: bold; margin: 5px 0;">Autonomía</div>
+                <div style="font-size: 10pt;">{{AUTONOMY_LEVEL}}</div>
+            </div>
+            <div class="motivation-card">
+                <div class="motivation-score">{{SECURITY_SCORE}}</div>
+                <div style="font-weight: bold; margin: 5px 0;">Seguridad</div>
+                <div style="font-size: 10pt;">{{SECURITY_LEVEL}}</div>
+            </div>
+            <div class="motivation-card">
+                <div class="motivation-score">{{RECOGNITION_SCORE}}</div>
+                <div style="font-weight: bold; margin: 5px 0;">Reconocimiento</div>
+                <div style="font-size: 10pt;">{{RECOGNITION_LEVEL}}</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ANÁLISIS AI -->
+    <div class="section">
+        <div class="section-title">Análisis Psicológico Detallado</div>
+        <div class="analysis-section">
+            {{AI_PSYCHOLOGICAL_ANALYSIS}}
+        </div>
+    </div>
+
+    <!-- RECOMENDACIONES -->
+    <div class="section">
+        <div class="section-title">Recomendaciones de Desarrollo</div>
+        <div class="analysis-section">
+            {{AI_DEVELOPMENT_RECOMMENDATIONS}}
+        </div>
+    </div>
+
+    <!-- FACTORES PERSONALES -->
+    <div class="section">
+        <div class="section-title">Factores Personales de Ajuste</div>
+        <div class="info-grid">
+            <div class="info-item">
+                <div class="info-label">Estado Civil:</div>
+                <div>{{MARITAL_STATUS}}</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Tiene Hijos:</div>
+                <div>{{HAS_CHILDREN}}</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Situación Habitacional:</div>
+                <div>{{HOUSING_STATUS}}</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Edad:</div>
+                <div>{{AGE}} años</div>
+            </div>
+        </div>
+        <div style="margin-top: 15px;">
+            <div class="info-label">Ajuste Personal Total:</div>
+            <div style="font-size: 14pt; font-weight: bold; color: #6B46C1;">{{PERSONAL_ADJUSTMENT}}%</div>
+        </div>
+    </div>
+
+    <!-- PERFIL LABORAL RECOMENDADO -->
+    <div class="section">
+        <div class="section-title">Perfil Laboral Recomendado</div>
+        <div class="analysis-section">
+            <div style="font-weight: bold; margin-bottom: 10px;">Fortalezas Identificadas:</div>
+            <div style="margin-bottom: 15px;">{{IDENTIFIED_STRENGTHS}}</div>
+            
+            <div style="font-weight: bold; margin-bottom: 10px;">Áreas de Desarrollo:</div>
+            <div style="margin-bottom: 15px;">{{DEVELOPMENT_AREAS}}</div>
+            
+            <div style="font-weight: bold; margin-bottom: 10px;">Roles Recomendados:</div>
+            <div>{{RECOMMENDED_ROLES}}</div>
+        </div>
+    </div>
+
+    <!-- INTERPRETACIÓN DE NIVELES -->
+    <div class="section">
+        <div class="section-title">Interpretación de Niveles</div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px;">
+            <div style="padding: 15px; background-color: #e8f5e8; border-left: 4px solid #4CAF50;">
+                <div style="font-weight: bold; color: #4CAF50;">ALTO (70-100)</div>
+                <div style="font-size: 10pt;">Rasgo muy desarrollado y predominante en la personalidad.</div>
+            </div>
+            <div style="padding: 15px; background-color: #fff3e0; border-left: 4px solid #FF9800;">
+                <div style="font-weight: bold; color: #FF9800;">MEDIO (30-69)</div>
+                <div style="font-size: 10pt;">Rasgo moderadamente presente, con variabilidad situacional.</div>
+            </div>
+            <div style="padding: 15px; background-color: #ffebee; border-left: 4px solid #F44336;">
+                <div style="font-weight: bold; color: #F44336;">BAJO (0-29)</div>
+                <div style="font-size: 10pt;">Rasgo poco desarrollado o manifestado raramente.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+        <div class="logo-placeholder" style="width: 50px; height: 50px; margin: 0 auto 10px;">{{FOOTER_LOGO}}</div>
+        <div style="font-weight: bold;">{{COMPANY_NAME}}</div>
+        {{COMPANY_ADDRESS}}<br>
+        Teléfono: {{COMPANY_PHONE}}<br>
+        Email: {{COMPANY_EMAIL}}<br>
+        <div style="margin-top: 10px; font-style: italic;">
+            Reporte generado automáticamente el {{GENERATION_DATE}}
+        </div>
+    </div>
+</body>
+</html>
