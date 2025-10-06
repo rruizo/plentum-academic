@@ -1,0 +1,34 @@
+project_id = "popufimnleaubvlwyusb"
+
+[functions.send-exam-invitations]
+verify_jwt = false
+
+[functions.admin-user-management]
+verify_jwt = false
+
+[functions.admin-data-purge]
+verify_jwt = false
+
+[functions.session-auth]
+verify_jwt = false
+
+[functions.get-exam-data]
+verify_jwt = false
+
+[functions.generate-pdf-report]
+verify_jwt = false
+
+[functions.generate-pdf-with-storage]
+verify_jwt = false
+
+[functions.generate-alternative-pdf-report]
+verify_jwt = false
+
+[functions.test-pdf-storage]
+verify_jwt = false
+
+[functions.generar-preguntas-cognitivas]
+verify_jwt = false
+
+[functions.generate-statistical-report]
+verify_jwt = false

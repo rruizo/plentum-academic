@@ -1,0 +1,221 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. */
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+
+    --radius: 0.5rem;
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+    @apply border-border;
+  }
+  
+  html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+  }
+  
+  @media (max-width: 768px) {
+    html {
+      font-size: 14px;
+    }
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    overflow-x: hidden;
+    line-height: 1.5;
+  }
+  
+  /* Responsive containers */
+  .container {
+    @apply w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+  
+  /* Responsive grid utilities */
+  .grid-responsive {
+    @apply grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4;
+  }
+  
+  .grid-responsive-cards {
+    @apply grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4;
+  }
+  
+  .grid-responsive-dashboard {
+    @apply grid grid-cols-1 gap-6 lg:grid-cols-12;
+  }
+  
+  /* Responsive text utilities */
+  .text-responsive-xl {
+    @apply text-lg sm:text-xl lg:text-2xl xl:text-3xl;
+  }
+  
+  .text-responsive-lg {
+    @apply text-base sm:text-lg lg:text-xl;
+  }
+  
+  .text-responsive-base {
+    @apply text-sm sm:text-base;
+  }
+  
+  /* Responsive spacing utilities */
+  .space-responsive {
+    @apply space-y-4 sm:space-y-6 lg:space-y-8;
+  }
+  
+  .padding-responsive {
+    @apply p-4 sm:p-6 lg:p-8;
+  }
+  
+  /* Responsive flexbox utilities */
+  .flex-responsive {
+    @apply flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between;
+  }
+  
+  /* Mobile-first navigation */
+  .nav-mobile {
+    @apply block lg:hidden;
+  }
+  
+  .nav-desktop {
+    @apply hidden lg:block;
+  }
+  
+  /* Responsive table wrapper */
+  .table-wrapper {
+    @apply overflow-x-auto scrollbar-thin scrollbar-track-gray-100 scrollbar-thumb-gray-300;
+  }
+  
+  /* Prevent horizontal overflow */
+  .prevent-overflow {
+    @apply overflow-hidden;
+  }
+  
+  /* Better text wrapping */
+  .break-text {
+    @apply break-words hyphens-auto;
+  }
+  
+  /* Truncate text utilities */
+  .truncate-responsive {
+    @apply truncate sm:whitespace-normal;
+  }
+  
+  /* Responsive dialog */
+  .dialog-responsive {
+    @apply w-full max-w-sm sm:max-w-md lg:max-w-lg xl:max-w-xl;
+  }
+  
+  /* Media queries for fine-tuning */
+  @media (max-width: 640px) {
+    .card-mobile {
+      @apply p-3 space-y-3;
+    }
+    
+    .button-mobile {
+      @apply px-3 py-2 text-xs;
+    }
+    
+    .input-mobile {
+      @apply text-sm px-3 py-2;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .table-mobile {
+      @apply text-xs;
+    }
+    
+    .sidebar-mobile {
+      @apply fixed inset-y-0 left-0 z-50 w-64 transform transition-transform duration-300 ease-in-out;
+    }
+  }
+}

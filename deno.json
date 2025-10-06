@@ -1,0 +1,15 @@
+{
+  "nodeModulesDir": "auto",
+  "imports": {
+    "@/": "./src/",
+    "@supabase/supabase-js": "https://esm.sh/@supabase/supabase-js@2.50.0",
+    "resend": "npm:resend@4.0.0"
+  },
+  "tasks": {
+    "dev": "deno run --allow-all --watch main.ts"
+  },
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "jsxImportSource": "react"
+  }
+}
